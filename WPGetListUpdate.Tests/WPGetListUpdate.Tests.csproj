@@ -59,12 +59,6 @@
     <Compile Include="Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\WPGetListUpdate.PLib\WPGetListUpdate.PLib.csproj">
-      <Project>{3e47b146-1481-437d-b705-93f3efdf0dfb}</Project>
-      <Name>WPGetListUpdate.PLib</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
