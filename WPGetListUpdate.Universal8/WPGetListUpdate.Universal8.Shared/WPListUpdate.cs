@@ -50,9 +50,11 @@ namespace WPGetListUpdate.Universal.Shared
         {
             HttpWebRequest wbReq = WebRequest.CreateHttp(this.Site.SiteURi + this.PathToScripts);
             WebResponse wbResp = await wbReq.GetResponseAsync();
-            StreamReader sr = new StreamReader(wbResp.GetResponseStream());
-            string plugins = await sr.ReadToEndAsync();
-            return plugins.Split(',').ToList();
+            using (StreamReader sr = new StreamReader(wbResp.GetResponseStream()))
+            {
+                string plugins = await sr.ReadToEndAsync();
+                return plugins.Split(',').ToList();
+            }
         }
     }
 }

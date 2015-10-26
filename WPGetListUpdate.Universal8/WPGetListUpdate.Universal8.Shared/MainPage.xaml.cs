@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using WPGetListUpdate.Universal.Shared.Models;
 using WPGetListUpdate.Universal.Shared;
+using Windows.Networking.Connectivity;
 
 // Документацию по шаблону элемента пустой страницы см. по адресу http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -31,19 +32,44 @@ namespace WPGetListUpdate.Universal
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            WPSite WPSite = new WPSite("Maximum", new Uri("http://maximum-kirov.ru/"));
-            WPListUpdate wplu = new WPListUpdate(WPSite);
-            List<string> PluginsWithUpdate = await wplu.GetPluginsWithUpdate();
-
-            WPSite WPSite1 = new WPSite("Express", new Uri("http://express-kirov.ru/"));
-            WPListUpdate wplu1 = new WPListUpdate(WPSite1);
-            List<string> PluginsWithUpdate1 = await wplu1.GetPluginsWithUpdate();
-
-
-            List<List<string>> lls = new List<List<string>>();
-            lls.Add(PluginsWithUpdate);
-            lls.Add(PluginsWithUpdate1);
-            listView.ItemsSource = lls;
+            listView.Items.Clear();
+            ConnectionProfile profile = NetworkInformation.GetInternetConnectionProfile();
+            bool isinternet = (profile != null) && profile.GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess;
+            if (isinternet)
+            {
+                var sf = await Windows.Storage.ApplicationData.Current.LocalFolder.CreateFileAsync("sites.txt", Windows.Storage.CreationCollisionOption.OpenIfExists);
+                using (var stream = await sf.OpenStreamForReadAsync())
+                {
+                    using (StreamReader sr = new StreamReader(stream))
+                    {
+                        while (!sr.EndOfStream)
+                        {
+                            string[] s = sr.ReadLine().Split(',');
+                            if (s.Length > 1)
+                            {
+                                WPSite wps = new WPSite(s[0], s[1]);
+                                WPListUpdate wplu = new WPListUpdate(wps);
+                                List<string> plugins = await wplu.GetPluginsWithUpdate();
+                                plugins.Insert(0, "Сайт " + s[0] + ":");
+                                plugins.Add(string.Empty);
+                                foreach (string ss in plugins)
+                                {
+                                    listView.Items.Add(ss);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
+
+        private void AppBarButton_Add_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(SiteManagerPage));
+        }
+
+        
+
+        
     }
 }

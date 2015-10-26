@@ -1,0 +1,20 @@
+﻿<Page
+    x:Class="WPGetListUpdate.Universal.AddSitePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WPGetListUpdate.Universal"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Margin="38,51,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="375"/>
+        <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" Margin="38,154,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="375"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="38,33,0,0" TextWrapping="Wrap" Text="Имя сайта" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" Margin="38,136,0,0" TextWrapping="Wrap" Text="Ссылка на сайт" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox_Copy1" HorizontalAlignment="Left" Margin="38,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="375"/>
+        <TextBlock x:Name="textBlock_Copy1" HorizontalAlignment="Left" Margin="38,230,0,0" TextWrapping="Wrap" Text="Относительный путь до скрипта" VerticalAlignment="Top"/>
+        <Button x:Name="button" Content="Добавить" HorizontalAlignment="Left" Margin="315,321,0,0" VerticalAlignment="Top" Click="button_Click"/>
+
+    </Grid>
+</Page>

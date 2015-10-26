@@ -1,0 +1,20 @@
+﻿<Page
+    x:Class="WPGetListUpdate.Universal.SiteManagerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WPGetListUpdate.Universal"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Loaded="Page_Loaded">
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton Icon="Add" Label="Добавить сайт" Click="AppBarButton_Add_Click"/>
+            <AppBarButton Icon="Delete" Label="Удалить сайт" Click="AppBarButton_Delete_Click"/>
+            <AppBarButton Icon="ClosePane" Label="Вернуться" Click="AppBarButton_Return_Click"/>
+        </CommandBar>
+    </Page.BottomAppBar>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ListView x:Name="listView" HorizontalAlignment="Left" Margin="10,10,10,10" VerticalAlignment="Top" />
+
+    </Grid>
+</Page>

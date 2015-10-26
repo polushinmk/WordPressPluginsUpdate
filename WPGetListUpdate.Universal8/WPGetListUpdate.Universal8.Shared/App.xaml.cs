@@ -38,9 +38,31 @@ namespace WPGetListUpdate.Universal
         {
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
-            //RegisterBackgroundTasks();
+            RegisterBackgroundTasks();
         }
-       
+
+        private void RegisterBackgroundTasks()
+        {
+            TimeTrigger taskTrigger = new TimeTrigger(15, false);
+            foreach (var _task in BackgroundTaskRegistration.AllTasks)
+            {
+                if (_task.Value.Name == "WPGetListUpdate")
+                {
+                    _task.Value.Unregister(true);
+                }
+            }
+
+            var bgTaskBuilder = new BackgroundTaskBuilder();
+            bgTaskBuilder.Name = "WPGetListUpdate";
+            bgTaskBuilder.TaskEntryPoint = "BackgroundTaskWinMD.WPGetListUpdateBackgroundTask";
+            bgTaskBuilder.SetTrigger(taskTrigger);
+            // условие, согласно которому триггер будет выполнен только если интернет доступен
+            SystemCondition internetCondition = new SystemCondition(SystemConditionType.InternetAvailable);
+            bgTaskBuilder.AddCondition(internetCondition);
+            BackgroundTaskRegistration task = bgTaskBuilder.Register();
+
+        }
+
         /// <summary>
         /// Вызывается при обычном запуске приложения пользователем.  Будут использоваться другие точки входа,
         /// если приложение запускается для открытия конкретного файла, отображения

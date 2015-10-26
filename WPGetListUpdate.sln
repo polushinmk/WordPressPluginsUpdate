@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPGetListUpdate.Universal.W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPGetListUpdate.Universal.WindowsPhone", "WPGetListUpdate.Universal8\WPGetListUpdate.Universal8.WindowsPhone\WPGetListUpdate.Universal.WindowsPhone.csproj", "{93E66ED5-2736-4A83-94EA-FB38D4D342E5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackgroundTaskWinMD", "BackgroundTaskWinMD\BackgroundTaskWinMD.csproj", "{CB283D0E-CADA-4359-B029-60BC2C06432E}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		WPGetListUpdate.Universal8\WPGetListUpdate.Universal8.Shared\WPGetListUpdate.Universal8.Shared.projitems*{4cbae5d0-ba87-43cc-9e77-39b2c9467478}*SharedItemsImports = 4
@@ -76,6 +78,22 @@ Global
 		{93E66ED5-2736-4A83-94EA-FB38D4D342E5}.Release|x86.ActiveCfg = Release|x86
 		{93E66ED5-2736-4A83-94EA-FB38D4D342E5}.Release|x86.Build.0 = Release|x86
 		{93E66ED5-2736-4A83-94EA-FB38D4D342E5}.Release|x86.Deploy.0 = Release|x86
+		{CB283D0E-CADA-4359-B029-60BC2C06432E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB283D0E-CADA-4359-B029-60BC2C06432E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB283D0E-CADA-4359-B029-60BC2C06432E}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{CB283D0E-CADA-4359-B029-60BC2C06432E}.Debug|ARM.Build.0 = Debug|Any CPU
+		{CB283D0E-CADA-4359-B029-60BC2C06432E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CB283D0E-CADA-4359-B029-60BC2C06432E}.Debug|x64.Build.0 = Debug|Any CPU
+		{CB283D0E-CADA-4359-B029-60BC2C06432E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CB283D0E-CADA-4359-B029-60BC2C06432E}.Debug|x86.Build.0 = Debug|Any CPU
+		{CB283D0E-CADA-4359-B029-60BC2C06432E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB283D0E-CADA-4359-B029-60BC2C06432E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB283D0E-CADA-4359-B029-60BC2C06432E}.Release|ARM.ActiveCfg = Release|Any CPU
+		{CB283D0E-CADA-4359-B029-60BC2C06432E}.Release|ARM.Build.0 = Release|Any CPU
+		{CB283D0E-CADA-4359-B029-60BC2C06432E}.Release|x64.ActiveCfg = Release|Any CPU
+		{CB283D0E-CADA-4359-B029-60BC2C06432E}.Release|x64.Build.0 = Release|Any CPU
+		{CB283D0E-CADA-4359-B029-60BC2C06432E}.Release|x86.ActiveCfg = Release|Any CPU
+		{CB283D0E-CADA-4359-B029-60BC2C06432E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -84,5 +102,6 @@ Global
 		{02A0D9C2-1BDF-4FDE-8B73-26D4EAC4BE10} = {9768CB11-A70F-416F-A1F0-C0D52A0197FF}
 		{4CBAE5D0-BA87-43CC-9E77-39B2C9467478} = {9768CB11-A70F-416F-A1F0-C0D52A0197FF}
 		{93E66ED5-2736-4A83-94EA-FB38D4D342E5} = {9768CB11-A70F-416F-A1F0-C0D52A0197FF}
+		{CB283D0E-CADA-4359-B029-60BC2C06432E} = {9768CB11-A70F-416F-A1F0-C0D52A0197FF}
 	EndGlobalSection
 EndGlobal

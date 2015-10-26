@@ -35,5 +35,9 @@ namespace WPGetListUpdate.Universal.Shared.Models
         {
             return Regex.IsMatch(uri, @"^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$");
         }
+        public override string ToString()
+        {
+            return this.SiteName;
+        }
     }
 }
