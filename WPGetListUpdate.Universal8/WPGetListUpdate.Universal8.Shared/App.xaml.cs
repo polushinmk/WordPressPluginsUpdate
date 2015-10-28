@@ -51,7 +51,7 @@ namespace WPGetListUpdate.Universal
                     _task.Value.Unregister(true);
                 }
             }
-
+            SystemTrigger striger = new SystemTrigger(SystemTriggerType.InternetAvailable, false);
             var bgTaskBuilder = new BackgroundTaskBuilder();
             bgTaskBuilder.Name = "WPGetListUpdate";
             bgTaskBuilder.TaskEntryPoint = "BackgroundTaskWinMD.WPGetListUpdateBackgroundTask";

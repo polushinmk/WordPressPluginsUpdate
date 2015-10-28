@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Navigation;
 using WPGetListUpdate.Universal.Shared.Models;
 using WPGetListUpdate.Universal.Shared;
 using Windows.Networking.Connectivity;
+using Windows.UI.Notifications;
 
 // Документацию по шаблону элемента пустой страницы см. по адресу http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -35,6 +36,7 @@ namespace WPGetListUpdate.Universal
             listView.Items.Clear();
             ConnectionProfile profile = NetworkInformation.GetInternetConnectionProfile();
             bool isinternet = (profile != null) && profile.GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess;
+            List<string> sites = new List<string>();
             if (isinternet)
             {
                 var sf = await Windows.Storage.ApplicationData.Current.LocalFolder.CreateFileAsync("sites.txt", Windows.Storage.CreationCollisionOption.OpenIfExists);
@@ -47,6 +49,7 @@ namespace WPGetListUpdate.Universal
                             string[] s = sr.ReadLine().Split(',');
                             if (s.Length > 1)
                             {
+                                sites.Add(s[0]);
                                 WPSite wps = new WPSite(s[0], s[1]);
                                 WPListUpdate wplu = new WPListUpdate(wps);
                                 List<string> plugins = await wplu.GetPluginsWithUpdate();
@@ -59,6 +62,22 @@ namespace WPGetListUpdate.Universal
                             }
                         }
                     }
+                }
+                if (sites.Count > 0)
+                {
+                    var tiledoc = TileUpdateManager.GetTemplateContent(TileTemplateType.TileWide310x150Text04);
+                    var nodes = tiledoc.SelectNodes("tile/visual/binding/text");
+
+
+                    string allsites = string.Empty;
+                    foreach (string s in sites)
+                    {
+                        allsites += s + ", ";
+                    }
+                    nodes[0].InnerText = "Имеются обновления плагинов на следующих сайтах: " + allsites.TrimEnd(new char[] { ',', ' ' });
+
+                    TileNotification tile = new TileNotification(tiledoc);
+                    TileUpdateManager.CreateTileUpdaterForApplication().Update(tile);
                 }
             }
         }

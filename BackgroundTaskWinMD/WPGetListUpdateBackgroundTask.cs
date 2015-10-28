@@ -52,7 +52,7 @@ namespace BackgroundTaskWinMD
             {
                 allsites += s + ", ";
             }
-            nodes[0].InnerText = "Имеются обновления плагинов на следующих сайтах: " + allsites.TrimEnd(',');
+            nodes[0].InnerText = "Имеются обновления плагинов на следующих сайтах: " + allsites.TrimEnd(new char[] { ',',' '});
             
             TileNotification tile = new TileNotification(tiledoc);
             TileUpdateManager.CreateTileUpdaterForApplication().Update(tile);

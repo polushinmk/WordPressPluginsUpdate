@@ -17,7 +17,7 @@ namespace WPGetListUpdate.Universal.Shared.Models
         {
             if (!IsValid(siteUri))
             {
-                throw new ArgumentOutOfRangeException("siteUri", "Плохой URL");
+                throw new ArgumentOutOfRangeException("siteUri", siteUri, "Плохой URL");
             }
             else
             {
@@ -33,7 +33,7 @@ namespace WPGetListUpdate.Universal.Shared.Models
         }
         private bool IsValid(string uri)
         {
-            return Regex.IsMatch(uri, @"^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$");
+            return Regex.IsMatch(uri, @"^(https?:\/\/)?([\da-zA-Z\.-]+)\.([a-zA-Z\.]{2,6})([\/\w \.-]*)*\/?$");
         }
         public override string ToString()
         {

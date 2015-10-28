@@ -69,7 +69,7 @@ namespace WPGetListUpdate.Universal
                     }
                 }
             }
-
+            sf = await Windows.Storage.ApplicationData.Current.LocalFolder.CreateFileAsync("sites.txt", Windows.Storage.CreationCollisionOption.ReplaceExisting);
             using (var stream = await sf.OpenStreamForWriteAsync())
             {
                 using (StreamWriter sw = new StreamWriter(stream))
@@ -77,7 +77,7 @@ namespace WPGetListUpdate.Universal
                     sw.AutoFlush = true;
                     foreach (string s in sites)
                     {
-                        if (!s.Contains(listView.SelectedValue.ToString()))
+                        if (!s.Contains(listView.SelectedItem.ToString()))
                         {
                             sw.WriteLine(s);
                         }
