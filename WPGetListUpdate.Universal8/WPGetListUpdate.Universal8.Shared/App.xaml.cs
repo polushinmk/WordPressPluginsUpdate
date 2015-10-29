@@ -41,26 +41,38 @@ namespace WPGetListUpdate.Universal
             RegisterBackgroundTasks();
         }
 
-        private void RegisterBackgroundTasks()
+        private async void RegisterBackgroundTasks()
         {
-            TimeTrigger taskTrigger = new TimeTrigger(15, false);
-            foreach (var _task in BackgroundTaskRegistration.AllTasks)
+            var access = await BackgroundExecutionManager.RequestAccessAsync();
+            if (access == BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity || access == BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity)
             {
-                if (_task.Value.Name == "WPGetListUpdate")
+                TimeTrigger taskTrigger = new TimeTrigger(15, false);
+                foreach (var _task in BackgroundTaskRegistration.AllTasks)
                 {
-                    _task.Value.Unregister(true);
+                    if (_task.Value.Name == "WPGetListUpdateTimer" || _task.Value.Name=="WPGetListUpdateInternet")
+                    {
+                        _task.Value.Unregister(true);
+                    }
                 }
-            }
-            SystemTrigger striger = new SystemTrigger(SystemTriggerType.InternetAvailable, false);
-            var bgTaskBuilder = new BackgroundTaskBuilder();
-            bgTaskBuilder.Name = "WPGetListUpdate";
-            bgTaskBuilder.TaskEntryPoint = "BackgroundTaskWinMD.WPGetListUpdateBackgroundTask";
-            bgTaskBuilder.SetTrigger(taskTrigger);
-            // условие, согласно которому триггер будет выполнен только если интернет доступен
-            SystemCondition internetCondition = new SystemCondition(SystemConditionType.InternetAvailable);
-            bgTaskBuilder.AddCondition(internetCondition);
-            BackgroundTaskRegistration task = bgTaskBuilder.Register();
+                SystemTrigger striger = new SystemTrigger(SystemTriggerType.InternetAvailable, false);
+                var bgTaskBuilder = new BackgroundTaskBuilder();
+                bgTaskBuilder.Name = "WPGetListUpdateTimer";
+                bgTaskBuilder.TaskEntryPoint = "BackgroundTaskWinMD.WPGetListUpdateBackgroundTask";
+                bgTaskBuilder.SetTrigger(taskTrigger);
+                // условие, согласно которому триггер будет выполнен только если интернет доступен
+                SystemCondition internetCondition = new SystemCondition(SystemConditionType.InternetAvailable);
+                bgTaskBuilder.AddCondition(internetCondition);
+                BackgroundTaskRegistration task = bgTaskBuilder.Register();
 
+                bgTaskBuilder = new BackgroundTaskBuilder();
+                bgTaskBuilder.Name = "WPGetListUpdateInternet";
+                bgTaskBuilder.TaskEntryPoint = "BackgroundTaskWinMD.WPGetListUpdateBackgroundTask";
+                bgTaskBuilder.SetTrigger(striger);
+                
+                bgTaskBuilder.AddCondition(internetCondition);
+                BackgroundTaskRegistration task2 = bgTaskBuilder.Register();
+
+            }
         }
 
         /// <summary>

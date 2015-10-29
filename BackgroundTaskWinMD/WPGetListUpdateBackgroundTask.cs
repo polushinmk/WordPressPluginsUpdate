@@ -31,7 +31,8 @@ namespace BackgroundTaskWinMD
                             while (!sr1.EndOfStream)
                             {
                                 string plugins = await sr1.ReadToEndAsync();
-                                if (plugins.Split(',').Length > 0)
+
+                                if (plugins != "none" && plugins != string.Empty && plugins.Split(',').Length > 0)
                                 {
                                     sites.Add(s[0]);
 
@@ -52,7 +53,7 @@ namespace BackgroundTaskWinMD
             {
                 allsites += s + ", ";
             }
-            nodes[0].InnerText = "Имеются обновления плагинов на следующих сайтах: " + allsites.TrimEnd(new char[] { ',',' '});
+            nodes[0].InnerText = "Обновление от "+ DateTime.Now + ". Имеются обновления плагинов на следующих сайтах: " + allsites.TrimEnd(new char[] { ',',' '});
             
             TileNotification tile = new TileNotification(tiledoc);
             TileUpdateManager.CreateTileUpdaterForApplication().Update(tile);

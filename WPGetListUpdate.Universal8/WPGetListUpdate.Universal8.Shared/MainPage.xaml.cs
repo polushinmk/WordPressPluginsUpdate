@@ -49,7 +49,7 @@ namespace WPGetListUpdate.Universal
                             string[] s = sr.ReadLine().Split(',');
                             if (s.Length > 1)
                             {
-                                sites.Add(s[0]);
+                                
                                 WPSite wps = new WPSite(s[0], s[1]);
                                 WPListUpdate wplu = new WPListUpdate(wps);
                                 List<string> plugins = await wplu.GetPluginsWithUpdate();
@@ -57,7 +57,14 @@ namespace WPGetListUpdate.Universal
                                 plugins.Add(string.Empty);
                                 foreach (string ss in plugins)
                                 {
-                                    listView.Items.Add(ss);
+                                    if (ss != "none" && ss != String.Empty)
+                                    {
+                                        listView.Items.Add(ss);
+                                        if (!sites.Contains(s[0]) && ss != "Сайт " + s[0] + ":")
+                                        {
+                                            sites.Add(s[0]);
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -74,7 +81,7 @@ namespace WPGetListUpdate.Universal
                     {
                         allsites += s + ", ";
                     }
-                    nodes[0].InnerText = "Имеются обновления плагинов на следующих сайтах: " + allsites.TrimEnd(new char[] { ',', ' ' });
+                    nodes[0].InnerText = "Обновление от " + DateTime.Now + ". Имеются обновления плагинов на следующих сайтах: " + allsites.TrimEnd(new char[] { ',', ' ' });
 
                     TileNotification tile = new TileNotification(tiledoc);
                     TileUpdateManager.CreateTileUpdaterForApplication().Update(tile);
